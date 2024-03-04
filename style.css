@@ -1,0 +1,78 @@
+:root{
+    --font-size: 2rem;
+    --base-color: #444;
+}
+
+body{
+    color: var(--base-color);
+    font-family: sans-serif;
+    font-weight: bolder;
+    font-size: var(--font-size);
+}
+
+.displayer{
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    & .logo{
+        display: inline-block;
+        width: 20vw;
+        height: 20vw;
+    }
+
+    & .tab {
+        display: inline-block;
+        width: 80vw;
+        display: flex;
+
+        & .notes {
+            width: 3vw;
+            line-height: 5vw;
+            border-right: 5px solid var(--base-color);
+
+            & p {
+                margin: 0;
+                text-align: center;
+            }
+        }
+        & .tab-play {
+            width: 77vw;
+            overflow: hidden;
+
+            & .string {
+                background: transparent;
+                height: 5vw;
+                vertical-align: middle;
+                display: flex;
+                margin-left: 0;
+                position: relative;
+                & .note{
+                    text-align: center;
+                    margin:0 5px;
+                    line-height: 5vw;
+                    min-width:5vw;
+                    
+                    & .note-content {
+                        background: #fff;
+                        padding: 0 10px;
+                    }
+                }
+            }
+
+            & .string::before {
+                content: "";
+                position: absolute;
+                border-top: 2px solid black;
+                width: 300vw;
+                height: 20px;
+                margin-top: 2.5vw;
+                z-index: -1;
+            }
+        }
+    }
+}
+
+.run {
+    margin-left: -900vw !important;
+    transition: all 200s ;
+}
