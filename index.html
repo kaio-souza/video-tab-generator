@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Tab Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <header>
+            <h1>Video Tab Generator</h1>
+            <p class="subtitle">Tablaturas sincronizadas com a música, direto no navegador.</p>
+        </header>
+
+        <section class="card">
+            <h2>Tablatura</h2>
+            <textarea id="tab" rows="8" spellcheck="false" wrap="off" aria-label="Tablatura"></textarea>
+            <ul id="errors" class="errors" hidden></ul>
+            <p class="hint">
+                Uma linha por corda, na ordem do instrumento. Cada compasso tem 16 posições (semicolcheias em 4/4),
+                fechado por <code>|</code>. Números são trastes (0–24), <code>-</code> é silêncio.
+                Sistemas são separados por uma linha em branco.
+            </p>
+            <div class="inline template-row">
+                <label class="grow">Compassos no modelo
+                    <input type="number" id="bars" min="1" max="32" step="1">
+                </label>
+                <button id="template" type="button" class="ghost">Novo modelo vazio</button>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Instrumento e visual</h2>
+            <div class="grid">
+                <label>Instrumento
+                    <select id="instrument"></select>
+                </label>
+                <label id="labels-field" hidden>Cordas (de cima para baixo)
+                    <input type="text" id="labels" placeholder="e B G D A E" spellcheck="false">
+                </label>
+                <label>Cor de destaque
+                    <input type="color" id="accent" value="#4ee1b0">
+                </label>
+                <label>Fundo
+                    <select id="background"></select>
+                </label>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Áudio e sincronia</h2>
+            <div class="grid">
+                <label class="wide">Arquivo de áudio
+                    <input type="file" id="audio-file" accept="audio/*">
+                </label>
+                <label>BPM
+                    <div class="inline">
+                        <input type="number" id="bpm" min="20" max="300" step="1">
+                        <button id="tap" type="button">Tap tempo</button>
+                    </div>
+                </label>
+                <label>Início da tab (s)
+                    <div class="inline">
+                        <input type="number" id="offset" step="0.01">
+                        <button id="nudge-back" type="button" class="ghost">−0,1</button>
+                        <button id="nudge-fwd" type="button" class="ghost">+0,1</button>
+                    </div>
+                </label>
+                <div class="wide">
+                    <button id="mark" type="button" class="ghost full">Marcar início no ponto atual do áudio</button>
+                    <button id="reset-nudges" type="button" class="ghost full">Zerar ajustes de notas</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="card preview">
+            <p class="hint">Arraste uma nota na prévia para ajustar o tempo dela.</p>
+            <canvas id="stage" width="1280" height="720"></canvas>
+            <audio id="player" controls></audio>
+            <div class="actions">
+                <button id="play" type="button" class="ghost">Tocar / pausar</button>
+                <button id="export" type="button" class="primary">Exportar vídeo</button>
+                <span id="status" role="status"></span>
+            </div>
+        </section>
+    </main>
+    <script type="module" src="src/app.js"></script>
+</body>
+</html>
